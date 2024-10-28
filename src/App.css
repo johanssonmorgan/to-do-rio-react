@@ -1,0 +1,147 @@
+*, *::after, *::before {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+}
+
+li, ul {
+  list-style: none;
+}
+
+a, button {
+  text-decoration: none;
+}
+
+.container {
+  margin: 0 auto;
+  padding-inline: 1rem;
+  width: 100%;
+
+  @media (width >= 768px) {
+      max-width: 720px;
+  }
+
+  @media (width >= 1400px) {
+      max-width: 1320px;
+  }
+}
+
+.header {
+  text-align: center;
+  padding-block: 1rem;
+
+  h1 {
+      font-weight: 900;
+  }
+
+  p {
+      font-weight: 600;
+      font-size: .7rem;
+  }
+}
+
+.todo-list {
+  background-color:lightgreen;
+  border-radius: .5rem;
+  width: 100%;
+  min-height: 70vh;
+  padding: 1rem;
+  margin-bottom: 5rem;
+}
+
+.todo-form {
+  display: flex;
+  position: relative;
+  margin-bottom: 1rem;
+
+  .todo-input {
+      flex: 1;
+      width: 100%;
+      font-size: 1rem;
+      padding: .5em;
+      padding-left: 2em;
+      border-radius: .5em 0 0 .5em;
+      border: none;
+
+      &::placeholder {
+          font-style: italic;
+      }
+
+      &:hover, &:active, &:focus-visible {
+          box-shadow: 0 0 10px #00000033;
+          outline: none;
+      }
+
+      &:hover, &:active, &:focus-visible ~ .todo-btn{
+          box-shadow: 0 0 10px #00000033;
+          outline: none;
+      }
+  }
+
+  .todo-btn {
+      font-size: 1;
+      font-weight: 900;
+      color: #000000;
+      padding: .5em 2em;
+      border-radius: 0 .5em .5em 0;
+      border: none;
+      cursor: pointer;
+  }
+
+  .form-icon {
+      height: 1em;
+      aspect-ratio: 1;
+      position: absolute;
+      transform: translateY(-50%);
+      left: .5em;
+      top: 50%;
+  }
+}
+
+  .tasks{
+
+      li {
+          display: flex;
+          gap: .5em;
+          align-items: center;
+          justify-content: space-between;
+          background-color: #fff;
+          margin-block: 1rem;
+          padding: .5rem;
+          border-radius: .5rem;
+          cursor: pointer;
+          transition: color .3s ease-in-out, text .3s ease-in-out, background .3s ease-in-out;
+
+          .btn-remove {
+              display: grid;
+              place-items: center;
+              height: 1rem;
+              aspect-ratio: 1;
+              border-radius: 50%;
+              border: none;
+              box-shadow: 0 0 10px #00000033;
+              cursor: pointer;
+
+               img {
+                  height: .5rem;
+               }
+          }
+
+          &:hover {
+              box-shadow: 0 0 10px #00000033;
+          }
+      }
+  }
+
+  .tasks{
+      li.done {
+          background-color: #d4edda;
+          text-shadow: 0 0 5px #00000033;
+          color: transparent;
+          transition: color .3s ease-in-out, text .3s ease-in-out, background .3s ease-in-out;
+      }
+  }
