@@ -145,3 +145,7 @@ a, button {
           transition: color .3s ease-in-out, text .3s ease-in-out, background .3s ease-in-out;
       }
   }
+
+  .noTaskMessage {
+    font-style: italic;
+  }

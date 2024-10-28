@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { v4 as uuidv4 } from 'uuid';
 
 import './App.css'
@@ -8,24 +8,31 @@ import SavedTasks from './assets/Components/SavedTasks'
 
 function App() {
 
-  const [tasks, setTasks] = useState([
-    {
-        id: uuidv4(),
-        todo: 'Fixa studier',
-        completed: false
-    },
-    {
-        id: uuidv4(),
-        todo: 'Bli proffs på React',
-        completed: false
-    }
-])
+  const [tasks, setTasks] = useState(() => {
+    const savedTasks = localStorage.getItem('tasks');
+    return savedTasks ? JSON.parse(savedTasks) : [];
+  });
+
+
+useEffect(() => {
+  localStorage.setItem('tasks', JSON.stringify(tasks));
+}, [tasks]);
 
 const addTask = (taskData) => {
   setTasks(state => {
-    return [...state, {id: uuidv4, todo: taskData, completed: false}]
+    return [...state, {id: uuidv4(), todo: taskData, completed: false}]
   })
 }
+
+const toggleCompleted = (id) => {
+  setTasks(state => 
+    state.map(task => 
+      task.id === id 
+        ? { ...task, completed: !task.completed } 
+        : task
+    )
+  );
+};
 
 const deleteTask = (id) => {
   setTasks(state => {
@@ -39,7 +46,7 @@ const deleteTask = (id) => {
           <Header />
           <div className="todo-list">
             <ToDoForm addTask={addTask}/>
-            <SavedTasks tasks={tasks} deleteTask={deleteTask} />
+            <SavedTasks tasks={tasks} deleteTask={deleteTask} toggleCompleted={toggleCompleted} />
           </div>
       </div>
     </>
